@@ -1,15 +1,83 @@
-﻿<Window x:Class="GroupAssignment.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GroupAssignment"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Update Invoice" Height="600" Width="764" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
     <Grid>
-        <Menu>
-            <!-- opens search window -->
-            <Button Click="OpenSearchWindow" Content="Search for Invoice"/>
-        </Menu>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Search By" Width="auto" Height="auto" FontWeight="Bold">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Num" />
+                <ComboBox Grid.Row="1" Grid.Column="0" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Invoice Date" />
+                <TextBox Grid.Row="1" Grid.Column="1" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Total Cost:" />
+                <ComboBox Grid.Row="1" Grid.Column="2" />
+                <Button Grid.Row="1" Grid.Column="3" Content="Clear" />
+            </Grid>
+
+        </GroupBox>
+
+        <DataGrid Grid.Row="1" Grid.Column="0" Width="350" Height="250" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" EnableRowVirtualization="True" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Invoice Number" />
+                <DataGridTextColumn Header="Invoice Date" />
+                <DataGridTextColumn Header="Total cost" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Edit Invoice" FontWeight="Bold">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Num:" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Invoice Date:" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Total Cost:" />
+                <Button Grid.Row="1" Grid.Column="3" Content="Clear" />
+                <TextBox Grid.Row="1" Grid.Column="0" />
+                <TextBox Grid.Row="1" Grid.Column="1" />
+                <TextBox Grid.Row="1" Grid.Column="2" />
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Content="Delete Invoice" />
+            <Button Content="Save Changes" />
+            <Button Content="Add Invoice" />
+            <Button Content="Edit Invoice" />
+            <Button Content="Cancel" />
+        </StackPanel>
+
     </Grid>
+
 </Window>

@@ -21,7 +21,7 @@ namespace GroupAssignment.Items {
         {
             logic = new clsItemsLogic();
             InitializeComponent();
-            updateTable();
+          //  updateTable();
            
         }
 

@@ -26,6 +26,7 @@
         <Label x:Name="lbl1" Content="Item Code" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="125,104,0,0" VerticalAlignment="Top" Width="133"/>
         <Label x:Name="lbl1_Copy" Content="Item Description" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="125,163,0,0" VerticalAlignment="Top" Width="133"/>
         <Label x:Name="lbl1_Copy1" Content="Item Cost" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="125,12.4,0,0" VerticalAlignment="Top" Width="133" Grid.Row="1"/>
+        <Label x:Name="lblTest" Content="TEST" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="148,79.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141"/>
         <!-- Content goes here -->
         <!-- Eventually, this will be where an item will be updated, and data will be sent to the database -->
     </Grid>

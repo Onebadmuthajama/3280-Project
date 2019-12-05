@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Data;
 
 namespace GroupAssignment.Items {
     /// <summary>
@@ -20,6 +21,7 @@ namespace GroupAssignment.Items {
         {
             logic = new clsItemsLogic();
             InitializeComponent();
+            updateTable();
            
         }
 
@@ -54,7 +56,7 @@ namespace GroupAssignment.Items {
 
             if (radioButtonAdd.IsChecked == true)
             {
-                logic.addItem(itemCode, itemDescription, itemCost);
+                logic.addItem(itemDescription, itemCost);
             }
             if (radioButtonDelete.IsChecked == true)
             {
@@ -65,6 +67,8 @@ namespace GroupAssignment.Items {
                 logic.updateItem(itemCode, itemDescription, itemCost);
             }
             updateTable();
+            
+
 
         }
 
@@ -75,7 +79,7 @@ namespace GroupAssignment.Items {
 
         public void updateTable()
         {
-
+         //   DataGridItems.DataContext = logic.getItems();
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using GroupAssignment.Items;
 using GroupAssignment.Search;
 
 namespace GroupAssignment.Main {
@@ -19,6 +20,13 @@ namespace GroupAssignment.Main {
             var sw = new SearchWindow();
             Close();
             sw.ShowDialog();
+        }
+
+        private void BtnToItems_Click(object sender, RoutedEventArgs e)
+        {
+            var iw = new ItemsWindow();
+            Close();
+            iw.ShowDialog();
         }
     }
 }

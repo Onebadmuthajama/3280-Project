@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
-using System.IO;
 
-namespace Assignemnt_6_Part_1 {
-    public class DatabaseAccess {
+namespace GroupAssignment {
+    public class clsDataAccess {
         /// <summary>
         ///     Connection string to the database.
         /// </summary>
         private readonly string _connectionString;
-
-        /// <summary>
-        ///     Constructor that sets the connection string to the database
-        /// </summary>
-        public DatabaseAccess() {
-            //TODO: Create SQL string when Entity Framework is implemented
-//            _connectionString =
-//                $@"Provider=Micosoft.Jet.OLEDB.4.0; Data source={Directory.GetCurrentDirectory()}\\ReservationSystem.mdb";
-//                $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={Directory.GetCurrentDirectory()}\\ReservationSystem.mdb";
-        }
 
         /// <summary>
         ///     This method takes an SQL statement that is passed in and executes it.  The resulting values

@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:GroupAssignment"
              StartupUri="Main/MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- <ResourceDictionary Source="themes/BureauBlack.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/BureauBlue.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/ExpressionDark.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/ExpressionLight.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/ShinyBlue.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/ShinyRed.xaml" /> -->
+        <!-- <ResourceDictionary Source="themes/WhistlerBlue.xaml" /> -->
     </Application.Resources>
 </Application>

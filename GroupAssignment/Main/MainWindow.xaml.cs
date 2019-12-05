@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using GroupAssignment.Search;
 
-namespace GroupAssignment {
+namespace GroupAssignment.Main {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>

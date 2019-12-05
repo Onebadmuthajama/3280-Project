@@ -6,17 +6,24 @@
         xmlns:local="clr-namespace:GroupAssignment.Main"
     mc:Ignorable="d"
 
-    Title="Update Invoice" Height="600" Width="764" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-
+    Title="Update Invoice" Height="500" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Search By" Width="auto" Height="auto" FontWeight="Bold">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Click="OpenSearchWindow" Header="_Item"/>
+                <MenuItem Click="OpenItemWindow" Header="_Search"/>
+            </Menu>
+        </DockPanel>
+
+        <GroupBox Grid.Row="1" Header="Search By" Width="auto" Margin="10,5,10,0" Height="auto" FontWeight="Bold">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -30,18 +37,18 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Num" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Number:" />
                 <ComboBox Grid.Row="1" Grid.Column="0" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Invoice Date" />
-                <TextBox Grid.Row="1" Grid.Column="1" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Total Cost:" />
-                <ComboBox Grid.Row="1" Grid.Column="2" />
-                <Button Grid.Row="1" Grid.Column="3" Content="Clear" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="Invoice Date:" />
+                <TextBox Grid.Row="1" Grid.Column="1"  Margin="10,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Text="Total Cost:" />
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" />
+                <Button Grid.Row="1" Grid.Column="3" Margin="10,0,0,0" Content="Clear" />
             </Grid>
 
         </GroupBox>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" Width="350" Height="250" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" EnableRowVirtualization="True" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid Grid.Row="2" Grid.Column="0" Width="375" Height="250" Margin="10,10,10,0" AutoGenerateColumns="False" CanUserAddRows="False" EnableRowVirtualization="True" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Invoice Number" />
                 <DataGridTextColumn Header="Invoice Date" />
@@ -49,7 +56,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="Edit Invoice" FontWeight="Bold">
+        <GroupBox Grid.Row="3" Grid.Column="0" Margin="10,10,10,0" Header="Edit Invoice" FontWeight="Bold">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -63,22 +70,22 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Num:" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Invoice Date:" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Total Cost:" />
-                <Button Grid.Row="1" Grid.Column="3" Content="Clear" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Number:" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="Invoice Date:" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Text="Total Cost:" />
                 <TextBox Grid.Row="1" Grid.Column="0" />
-                <TextBox Grid.Row="1" Grid.Column="1" />
-                <TextBox Grid.Row="1" Grid.Column="2" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" />
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" />
+                <Button Grid.Row="1" Grid.Column="3" Margin="10,0,0,0" Content="Clear" />
             </Grid>
         </GroupBox>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <StackPanel Grid.Row="4" Margin="10,10,10,0" Orientation="Horizontal">
             <Button Content="Delete Invoice" />
-            <Button Content="Save Changes" />
-            <Button Content="Add Invoice" />
-            <Button Content="Edit Invoice" />
-            <Button Content="Cancel" />
+            <Button Margin="10,0,0,0" Content="Save Changes" />
+            <Button Margin="10,0,0,0" Content="Add Invoice" />
+            <Button Margin="10,0,0,0" Content="Edit Invoice" />
+            <Button Margin="10,0,0,0" Content="Cancel" />
         </StackPanel>
 
     </Grid>

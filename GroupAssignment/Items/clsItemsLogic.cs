@@ -8,8 +8,8 @@ namespace GroupAssignment.Items
 {
     class clsItemsLogic
     {
-        private int cost;
-        private int itemCode;
+        private String cost;
+        private String Code;
         private int invoiceNumber;
         private String description;
         clsItemsSQL iSQL;
@@ -25,20 +25,21 @@ namespace GroupAssignment.Items
             itemDescription = iSQL.Getitems("30.00");
             return itemDescription;
         }
-        public void addItem()
+        public void addItem(String itemCode, String itemDescription, String itemCost)
         {
 
         }
-        public void deleteItem()
+        public void deleteItem(String itemCode)
         {
 
         }
-        public void updateItem(int itemID)
+        public void updateItem(String itemCode, String itemDescription,String itemCost)
         {
 
 
-
         }
+        
+
 
 
 

@@ -4,90 +4,78 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Main"
-    mc:Ignorable="d"
-
-    Title="Update Invoice" Height="500" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        mc:Ignorable="d"
+        Title="Invoices" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+    <!-- Parent Grid -->
     <Grid>
+        <!-- Column definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row definitions -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Click="OpenSearchWindow" Header="_Item"/>
-                <MenuItem Click="OpenItemWindow" Header="_Search"/>
-            </Menu>
-        </DockPanel>
+        <!-- Menu -->
+        <Menu Grid.Row="0" Height="20" VerticalAlignment="Top">
+            <MenuItem Click="OpenItemWindow" FontWeight="Medium" Header="_Update Items" />
+            <MenuItem Click="OpenSearchWindow" FontWeight="Medium" Header="_Search Invoices" />
+        </Menu>
 
-        <GroupBox Grid.Row="1" Header="Search By" Width="auto" Margin="10,5,10,0" Height="auto" FontWeight="Bold">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <!-- Area Above DataGrid -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,10,0,0" Orientation="Horizontal">
+                <Label Content="Invoice Number:" />
+                <TextBox Text="TBD" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
+                <Label Content="Invoice Date:" />
+                <DatePicker VerticalContentAlignment="Center" Focusable="False" />
+                <Label Content="Total Cost:" />
+                <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
+            </StackPanel>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Number:" />
-                <ComboBox Grid.Row="1" Grid.Column="0" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="Invoice Date:" />
-                <TextBox Grid.Row="1" Grid.Column="1"  Margin="10,0,0,0"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Text="Total Cost:" />
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" />
-                <Button Grid.Row="1" Grid.Column="3" Margin="10,0,0,0" Content="Clear" />
-            </Grid>
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
+                <Label Content="Item Code:" />
+                <ComboBox Width="150" VerticalContentAlignment="Center" IsEditable="True" />
+                <Label Content="Item Cost:" />
+                <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
+                <Button Margin="10,0,0,0" Content="Add" />
+            </StackPanel>
+        </Grid>
 
-        </GroupBox>
-
-        <DataGrid Grid.Row="2" Grid.Column="0" Width="375" Height="250" Margin="10,10,10,0" AutoGenerateColumns="False" CanUserAddRows="False" EnableRowVirtualization="True" IsReadOnly="True" SelectionMode="Single">
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="2" Margin="5,10,5,0" AutoGenerateColumns="False" Height="425" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Invoice Number" />
-                <DataGridTextColumn Header="Invoice Date" />
-                <DataGridTextColumn Header="Total cost" />
+                <DataGridTextColumn Header="Line Item Number" Binding="{Binding Path=LineItemNumber}" />
+                <DataGridTextColumn Header="Code" Binding="{Binding Path=ItemCode}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=ItemDescription}" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Path=ItemCost}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Grid.Row="3" Grid.Column="0" Margin="10,10,10,0" Header="Edit Invoice" FontWeight="Bold">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Invoice Number:" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" Text="Invoice Date:" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Text="Total Cost:" />
-                <TextBox Grid.Row="1" Grid.Column="0" />
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" />
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" />
-                <Button Grid.Row="1" Grid.Column="3" Margin="10,0,0,0" Content="Clear" />
-            </Grid>
-        </GroupBox>
-
-        <StackPanel Grid.Row="4" Margin="10,10,10,0" Orientation="Horizontal">
-            <Button Content="Delete Invoice" />
+        <!-- Bottom buttons -->
+        <StackPanel Grid.Row="3" Margin="5,10,0,0" Orientation="Horizontal">
+            <!-- delete item will only show if view is not read-only -->
+            <Button Content="Delete Item" />
+            <!-- Save changes will only show if in an edit state -->
             <Button Margin="10,0,0,0" Content="Save Changes" />
-            <Button Margin="10,0,0,0" Content="Add Invoice" />
+            <!-- Edit invoice will only show if not in an edit state -->
             <Button Margin="10,0,0,0" Content="Edit Invoice" />
+            <!-- Save invoice will only show if not in an edit state -->
+            <Button Margin="10,0,0,0" Content="Save Invoice" />
+            <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
+            <Button Margin="10,0,0,0" Content="Delete Invoice" />
+            <!-- Cancel button will only show when editing a saved invoice -->
             <Button Margin="10,0,0,0" Content="Cancel" />
         </StackPanel>
-
     </Grid>
-
 </Window>

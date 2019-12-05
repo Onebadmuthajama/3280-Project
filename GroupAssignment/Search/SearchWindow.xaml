@@ -11,8 +11,8 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-        </Grid.RowDefinitions>  
-            
+        </Grid.RowDefinitions>
+
         <StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
@@ -20,25 +20,28 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Dropdown 1"></Label>
-                <ComboBox Grid.Row="0" Grid.Column="1"></ComboBox>
-                <Label Grid.Row="1" Grid.Column="0" Content="Dropdown 2"></Label>
-                <ComboBox Grid.Row="1" Grid.Column="1"></ComboBox>
-                <Label Grid.Row="2" Grid.Column="0" Content="Dropdown 3"></Label>
-                <ComboBox Grid.Row="2" Grid.Column="1"></ComboBox>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Dropdown 1" />
+                <ComboBox Grid.Row="0" Grid.Column="1" />
+                <Label Grid.Row="1" Grid.Column="0" Content="Dropdown 2" />
+                <ComboBox Grid.Row="1" Grid.Column="1" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Dropdown 3" />
+                <ComboBox Grid.Row="2" Grid.Column="1" />
             </Grid>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" Margin="5,5,5,0"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" />
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Orientation="Horizontal">
             <!-- opens items window, will eventually pass the object from the DataGrid through to the items window -->
-            <Button Click="OpenItemsWindow" Width="50" Height="50" Content="Select" />
-            <Button Width="50" Height="50" Margin="5,0,0,0" Content="Cancel" />
+            <Button Click="CloseWindow" Width="50" Height="50" Content="Select" />
+            <Button Click="CloseWindow" Width="50" Height="50" Margin="5,0,0,0" Content="Cancel" />
         </StackPanel>
     </Grid>
 </Window>

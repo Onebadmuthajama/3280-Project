@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using GroupAssignment.Items;
 
 namespace GroupAssignment.Search {
     /// <summary>
@@ -11,14 +10,12 @@ namespace GroupAssignment.Search {
         }
 
         /// <summary>
-        /// opens items window
+        ///     Closes the window
         /// </summary>
         /// <param name="sender">UI object</param>
         /// <param name="e">event</param>
-        private void OpenItemsWindow(object sender, RoutedEventArgs e) {
-            var iw = new ItemsWindow();
+        private void CloseWindow(object sender, RoutedEventArgs e) {
             Close();
-            iw.ShowDialog();
         }
     }
 }

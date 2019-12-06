@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using GroupAssignment.Items;
+using GroupAssignment.Models;
 using GroupAssignment.Search;
 
 namespace GroupAssignment.Main {
@@ -8,15 +10,22 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        private readonly int _invoiceId;
+        private readonly List<LineItems> _items;
         private readonly clsMainLogic _mainLogic;
         private readonly clsMainSql _mainSql;
 
         public MainWindow() {
             _mainLogic = new clsMainLogic();
             _mainSql = new clsMainSql();
+
             InitializeComponent();
+
             SelectItemComboBox.ItemsSource = _mainSql.GetAllItems();
-//            ItemDataGrid.ItemsSource = _mainSql.GetAllItemsForInvoice(1);
+
+            _items = _mainSql.GetAllItemsForInvoice(5000);
+            _invoiceId = _items[0].InvoiceNum;
+            ItemDataGrid.ItemsSource = _items;
         }
 
         /// <summary>
@@ -45,7 +54,11 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DeleteItem(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            var lineItem = ((LineItems) ItemDataGrid.SelectedItem);
+            _items.Remove(lineItem);
+
+            ItemDataGrid.ItemsSource = null;
+            ItemDataGrid.ItemsSource = _items;
         }
 
         /// <summary>
@@ -67,11 +80,11 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        ///     Event Handler for the Save Invoice button
+        ///     Event Handler for the New Invoice button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SaveInvoice(object sender, RoutedEventArgs e) {
+        private void NewInvoice(object sender, RoutedEventArgs e) {
             throw new NotImplementedException();
         }
 
@@ -99,7 +112,10 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddItem(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
+            _items.Add(lineItem);
+            ItemDataGrid.ItemsSource = null;
+            ItemDataGrid.ItemsSource = _items;
         }
     }
 }

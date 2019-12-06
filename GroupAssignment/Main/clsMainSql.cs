@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using GroupAssignment.Models;
 
@@ -23,7 +22,7 @@ namespace GroupAssignment.Main {
 
             foreach (var row in ds) {
                 var itemDescription = new ItemDescription {
-                    ItemCode = row.Field<string>("ItemCode"),
+                    ItemCode = row.Field<int>("ItemCode"),
                     ItemDesc = row.Field<string>("ItemDesc"),
                     ItemCost = row.Field<decimal>("Cost")
                 };
@@ -39,8 +38,7 @@ namespace GroupAssignment.Main {
         /// </summary>
         /// <returns></returns>
         public List<LineItems> GetAllItemsForInvoice(int invoiceId) {
-//            const string sql = "SELECT InvoiceNum, LineItemNum, ItemCode, Cost FROM [LineItems] JOIN ItemDesc ON [LineItems].ItemCode = ItemDesc.ItemCode";
-            const string sql = "SELECT InvoiceNum, LineItemNum, LineItems.ItemCode, Cost FROM [LineItems] JOIN ItemDesc ON [LineItems].ItemCode = ItemDesc.ItemCode";
+            var sql = $"SELECT LineItems.InvoiceNum, LineItems.LineItemNum, LineItems.ItemCode, ItemDesc.Cost FROM LineItems INNER JOIN ItemDesc ON LineItems.ItemCode = ItemDesc.ItemCode WHERE LineItems.InvoiceNum = {invoiceId};";
 
             var result = new List<LineItems>();
             var ds = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
@@ -59,10 +57,4 @@ namespace GroupAssignment.Main {
             return result;
         }
     }
-
-//    SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-//    FROM Orders
-//    INNER JOIN Customers ON Orders.CustomerID= Customers.CustomerID;
-
-    //    SELECT InvoiceNum, LineItemNum, ItemCode, Cost FROM[LineItems] JOIN ItemDesc ON[LineItems].ItemCode = ItemDesc.ItemCode
 }

@@ -2,8 +2,8 @@
 
 namespace GroupAssignment.Models {
     internal class clsInvoice {
-        public int InvoiceNumber { get; set; }
-        public DateTime InvoiceDateTime { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
         public double TotalCost { get; set; }
     }
 }

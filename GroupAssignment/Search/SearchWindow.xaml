@@ -35,18 +35,14 @@
             </Grid>
         </StackPanel>
 
-        <DataGrid x:Name="listDisplay" Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" AutoGenerateColumns="False" >
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="col1" Header="Invoice Number" Binding="{Binding Path=invoiceNum}" />
-                <DataGridTextColumn Header="Invoice Date" Binding="{Binding Path=invoiceDate}" />
-                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=totalCost}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid x:Name="listDisplay" Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" />
+
+
 
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top"
                     Orientation="Horizontal">
-            <!-- opens items window, will eventually pass the object from the DataGrid through to the items window -->
-            <Button x:Name="selectButton" Click="CloseWindow" Width="50" Height="50" Content="Select" />
+            <!-- pass selected incoice number to main -->
+            <Button x:Name="selectButton" Click="SelectInvoice" Width="50" Height="50" Content="Select" />
             <Button x:Name="cancelButton" Click="CloseWindow" Width="50" Height="50" Margin="5,0,0,0" Content="Cancel" />
         </StackPanel>
     </Grid>

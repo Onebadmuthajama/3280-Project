@@ -21,7 +21,7 @@ namespace GroupAssignment.Search
         ///     Returns all items from Invoices
         /// </summary>
         /// <returns></returns>
-        public List<Invoice> getAllItems()
+        public List<Invoice> GetAllItems()
         {
             return sSQL.GetAllItems();
         }

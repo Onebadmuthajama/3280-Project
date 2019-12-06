@@ -22,9 +22,11 @@ namespace GroupAssignment.Search
         /// <returns></returns>
         public List<Invoice> GetAllItems()
         {
-            const string sql = "select * from Invoices";
+            var sql = $"SELECT Invoices.InvoiceNum, Invoices.InvoiceDate, Invoices.TotalCost FROM Invoices;";
+
             var result = new List<Invoice>();
             var ds = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
+
             foreach (var row in ds)
             {
                 var inv = new Invoice

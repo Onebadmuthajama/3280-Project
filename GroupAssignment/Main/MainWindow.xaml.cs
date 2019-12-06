@@ -90,8 +90,8 @@ namespace GroupAssignment.Main {
             ItemCostTextBox.IsEnabled = true;
             SelectItemComboBox.IsEnabled = true;
             AddItemButton.IsEnabled = true;
-            DeleteItemButton.IsEnabled = true;
-            ItemDataGrid.IsEnabled = true;
+//            DeleteItemButton.IsEnabled = true;
+            ItemDataGrid.IsEnabled = true;  
             NewInvoiceButton.IsEnabled = false;
         }
 
@@ -134,6 +134,10 @@ namespace GroupAssignment.Main {
 
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
             ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+        }
+
+        private void UpdateDeleteItemButton(object sender, SelectionChangedEventArgs e) {
+            DeleteItemButton.IsEnabled = ((DataGrid) sender).SelectedItems.Count >= 1;
         }
     }
 }

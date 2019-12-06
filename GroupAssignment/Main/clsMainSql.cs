@@ -12,7 +12,7 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        ///     Returns a data set containing all item descriptions from the database
+        ///     Returns a list of ItemDesc object
         /// </summary>
         /// <returns></returns>
         public List<ItemDescription> GetAllItems() {
@@ -34,6 +34,17 @@ namespace GroupAssignment.Main {
             return result;
         }
 
+        public decimal GetItemCostByItemCode(int itemCode) {
+            var sql = $"select cost from ItemDesc where itemCode = {itemCode}";
+
+            var result = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<decimal>("Cost")).FirstOrDefault();
+            return result;
+        }
+
+        /// <summary>
+        ///     Returns an int representing the largest invoiceNum in the database
+        /// </summary>
+        /// <returns></returns>
         public int GetLargestInvoiceId() {
             const string sql = "select InvoiceNum from Invoices order by InvoiceNum desc";
 
@@ -42,7 +53,7 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        ///     Returns a data set containing items for invoiceId
+        ///     Returns a list of LineItem object
         /// </summary>
         /// <returns></returns>
         public List<LineItems> GetAllItemsForInvoice(int invoiceId) {

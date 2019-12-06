@@ -26,22 +26,28 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="Dropdown 1" />
-                <ComboBox Grid.Row="0" Grid.Column="1" />
-                <Label Grid.Row="1" Grid.Column="0" Content="Dropdown 2" />
-                <ComboBox Grid.Row="1" Grid.Column="1" />
-                <Label Grid.Row="2" Grid.Column="0" Content="Dropdown 3" />
-                <ComboBox Grid.Row="2" Grid.Column="1" />
+                <Label Grid.Row="0" Grid.Column="0" Content="Invoice Number" />
+                <ComboBox x:Name="numFilter" Grid.Row="0" Grid.Column="1" />
+                <Label Grid.Row="1" Grid.Column="0" Content="Invoice Date" />
+                <ComboBox x:Name="dateFilter" Grid.Row="1" Grid.Column="1" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Total Cost" />
+                <ComboBox x:Name="chargeFilter" Grid.Row="2" Grid.Column="1" />
             </Grid>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" />
+        <DataGrid x:Name="listDisplay" Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Invoice Number" Binding="{Binding Path=InvoiceNum}" />
+                <DataGridTextColumn Header="Invoice Date" Binding="{Binding Path=InvoiceDate}" />
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=TotalCost}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top"
                     Orientation="Horizontal">
             <!-- opens items window, will eventually pass the object from the DataGrid through to the items window -->
-            <Button Click="CloseWindow" Width="50" Height="50" Content="Select" />
-            <Button Click="CloseWindow" Width="50" Height="50" Margin="5,0,0,0" Content="Cancel" />
+            <Button x:Name="selectButton" Click="CloseWindow" Width="50" Height="50" Content="Select" />
+            <Button x:Name="cancelButton" Click="CloseWindow" Width="50" Height="50" Margin="5,0,0,0" Content="Cancel" />
         </StackPanel>
     </Grid>
 </Window>

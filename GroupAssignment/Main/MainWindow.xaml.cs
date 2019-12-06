@@ -8,8 +8,14 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        private readonly clsMainLogic _mainLogic;
+        private readonly clsMainSql _mainSql;
+
         public MainWindow() {
+            _mainLogic = new clsMainLogic();
+            _mainSql = new clsMainSql();
             InitializeComponent();
+            SelectItemComboBox.ItemsSource = _mainSql.GetAllItems();
         }
 
         /// <summary>

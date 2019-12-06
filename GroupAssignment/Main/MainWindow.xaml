@@ -45,7 +45,7 @@
 
             <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
                 <Label Content="Item Code:" />
-                <ComboBox Width="150" VerticalContentAlignment="Center" IsEditable="True" />
+                <ComboBox Name="SelectItemComboBox" Width="150" VerticalContentAlignment="Center" IsEditable="True" />
                 <Label Content="Item Cost:" />
                 <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
                 <Button Click="AddItem" Margin="10,0,0,0" Content="Add" />
@@ -53,12 +53,12 @@
         </Grid>
 
         <!-- DataGrid -->
-        <DataGrid Grid.Row="2" Margin="5,10,5,0" AutoGenerateColumns="False" Height="425" IsReadOnly="True">
+        <DataGrid Grid.Row="2" Name="ItemDataGrid" Margin="5,10,5,0" AutoGenerateColumns="False" Height="425" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Line Item Number" Binding="{Binding Path=LineItemNumber}" />
-                <DataGridTextColumn Header="Code" Binding="{Binding Path=ItemCode}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Path=ItemDescription}" />
-                <DataGridTextColumn Header="Cost" Binding="{Binding Path=ItemCost}" />
+                <DataGridTextColumn Header="Line Item Number" />
+                <DataGridTextColumn Header="Code" />
+                <DataGridTextColumn Header="Description" />
+                <DataGridTextColumn Header="Cost" />
             </DataGrid.Columns>
         </DataGrid>
 

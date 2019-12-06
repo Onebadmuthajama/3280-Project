@@ -90,7 +90,6 @@ namespace GroupAssignment.Main {
             ItemCostTextBox.IsEnabled = true;
             SelectItemComboBox.IsEnabled = true;
             AddItemButton.IsEnabled = true;
-//            DeleteItemButton.IsEnabled = true;
             ItemDataGrid.IsEnabled = true;  
             NewInvoiceButton.IsEnabled = false;
         }
@@ -127,15 +126,28 @@ namespace GroupAssignment.Main {
             UpdateDataGridContent();
         }
 
+        /// <summary>
+        ///     Used to refresh the UI when the dataSource for the DataGrid is updated
+        /// </summary>
         private void UpdateDataGridContent() {
             ItemDataGrid.ItemsSource = null;
             ItemDataGrid.ItemsSource = _items;
         }
 
+        /// <summary>
+        ///     Event handler used to update the item cost TextBox when a new item is selected from the ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="selectionChangedEventArgs"></param>
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
             ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
         }
 
+        /// <summary>
+        ///     Event handler used to update the status of the DeleteItemButton based on if a row is selected on the DataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateDeleteItemButton(object sender, SelectionChangedEventArgs e) {
             DeleteItemButton.IsEnabled = ((DataGrid) sender).SelectedItems.Count >= 1;
         }

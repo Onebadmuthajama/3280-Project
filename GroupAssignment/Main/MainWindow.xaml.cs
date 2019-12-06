@@ -16,6 +16,7 @@ namespace GroupAssignment.Main {
             _mainSql = new clsMainSql();
             InitializeComponent();
             SelectItemComboBox.ItemsSource = _mainSql.GetAllItems();
+//            ItemDataGrid.ItemsSource = _mainSql.GetAllItemsForInvoice(1);
         }
 
         /// <summary>

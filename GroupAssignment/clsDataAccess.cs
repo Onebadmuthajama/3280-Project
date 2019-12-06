@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
+using System.IO;
 
 namespace GroupAssignment {
     public class clsDataAccess {
@@ -16,6 +17,17 @@ namespace GroupAssignment {
         /// </summary>
         /// <param name="sql"> The SQL statement to be executed </param>
         /// <returns> Returns a DataSet that contains the data from the SQL statement </returns>
+        ///
+        ///         private readonly string _connectionString;
+
+        /// <summary>
+        ///     Constructor that sets the connection string to the database
+        /// </summary>
+        public clsDataAccess() {
+            _connectionString =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0; Data source={Directory.GetCurrentDirectory()}\\Invoice.mdb";
+        }
+
         public DataSet ExecuteSqlStatement(string sql) {
             try {
                 //Create a new DataSet

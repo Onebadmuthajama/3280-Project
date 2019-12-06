@@ -5,8 +5,16 @@ namespace GroupAssignment.Search {
     ///     Interaction logic for SearchWindow.xaml
     /// </summary>
     public partial class SearchWindow : Window {
+        clsSearchLogic sl;
+
         public SearchWindow() {
             InitializeComponent();
+
+            //start up the search logic
+            sl = new clsSearchLogic();
+
+            //populate datagrid with Invoices
+            listDisplay.DataContext = sl.getItems();
         }
 
         /// <summary>

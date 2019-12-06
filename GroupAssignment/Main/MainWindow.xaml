@@ -48,7 +48,7 @@
                 <ComboBox Width="150" VerticalContentAlignment="Center" IsEditable="True" />
                 <Label Content="Item Cost:" />
                 <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
-                <Button Margin="10,0,0,0" Content="Add" />
+                <Button Click="AddItem" Margin="10,0,0,0" Content="Add" />
             </StackPanel>
         </Grid>
 
@@ -65,17 +65,17 @@
         <!-- Bottom buttons -->
         <StackPanel Grid.Row="3" Margin="5,10,0,0" Orientation="Horizontal">
             <!-- delete item will only show if view is not read-only -->
-            <Button Content="Delete Item" />
+            <Button Click="DeleteItem" Content="Delete Item" />
             <!-- Save changes will only show if in an edit state -->
-            <Button Margin="10,0,0,0" Content="Save Changes" />
+            <Button Click="SaveChanges" Margin="10,0,0,0" Content="Save Changes" />
             <!-- Edit invoice will only show if not in an edit state -->
-            <Button Margin="10,0,0,0" Content="Edit Invoice" />
+            <Button Click="EditInvoice" Margin="10,0,0,0" Content="Edit Invoice" />
             <!-- Save invoice will only show if not in an edit state -->
-            <Button Margin="10,0,0,0" Content="Save Invoice" />
+            <Button Click="SaveInvoice" Margin="10,0,0,0" Content="Save Invoice" />
             <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
-            <Button Margin="10,0,0,0" Content="Delete Invoice" />
+            <Button Click="DeleteInvoice" Margin="10,0,0,0" Content="Delete Invoice" />
             <!-- Cancel button will only show when editing a saved invoice -->
-            <Button Margin="10,0,0,0" Content="Cancel" />
+            <Button Click="CancelChanges" Margin="10,0,0,0" Content="Cancel Changes" />
         </StackPanel>
     </Grid>
 </Window>

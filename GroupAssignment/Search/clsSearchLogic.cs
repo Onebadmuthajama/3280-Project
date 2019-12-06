@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GroupAssignment.Models;
 
 namespace GroupAssignment.Search
 {
@@ -17,12 +18,12 @@ namespace GroupAssignment.Search
         }
 
         /// <summary>
-        /// Returns all items from Invoices
+        ///     Returns all items from Invoices
         /// </summary>
         /// <returns></returns>
-        public DataSet getItems()
+        public List<Invoice> getAllItems()
         {
-            return sSQL.GetItems();
+            return sSQL.GetAllItems();
         }
     }
 }

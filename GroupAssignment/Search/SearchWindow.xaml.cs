@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Data;
+using GroupAssignment.Models;
+using System.Collections.Generic;
 
 namespace GroupAssignment.Search {
     /// <summary>
@@ -7,7 +9,7 @@ namespace GroupAssignment.Search {
     /// </summary>
     public partial class SearchWindow : Window {
         clsSearchLogic sl;
-        DataSet list;
+        List<Invoice> list;
 
         EnumerableRowCollection<int> invoiceNum;
 
@@ -16,12 +18,12 @@ namespace GroupAssignment.Search {
 
             //start up the search logic
             sl = new clsSearchLogic();
-            list = sl.getItems();
+            list = sl.getAllItems();
 
             //populate datagrid with Invoices
-            //listDisplay.ItemsSource = list.Tables[0].AsEnumerable();
+            listDisplay.ItemsSource = list;
 
-            invoiceNum = list.Tables[0].AsEnumerable().Select(x => x.Field<int>("InvoiceNum"));
+            
 
         }
 

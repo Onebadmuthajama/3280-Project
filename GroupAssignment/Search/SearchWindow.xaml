@@ -35,11 +35,11 @@
             </Grid>
         </StackPanel>
 
-        <DataGrid x:Name="listDisplay" Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" >
+        <DataGrid x:Name="listDisplay" Grid.Row="1" Grid.Column="0" Margin="5,5,5,0" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Invoice Number" Binding="{Binding Path=InvoiceNum}" />
-                <DataGridTextColumn Header="Invoice Date" Binding="{Binding Path=InvoiceDate}" />
-                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=TotalCost}" />
+                <DataGridTextColumn x:Name="col1" Header="Invoice Number" Binding="{Binding Path=invoiceNum}" />
+                <DataGridTextColumn Header="Invoice Date" Binding="{Binding Path=invoiceDate}" />
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding Path=totalCost}" />
             </DataGrid.Columns>
         </DataGrid>
 

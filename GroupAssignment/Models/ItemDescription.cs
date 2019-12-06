@@ -1,7 +1,11 @@
 ﻿namespace GroupAssignment.Models {
     internal class ItemDescription {
-        public char Id { get; set; }
-        public double Cost { get; set; }
-        public char Description { get; set; }
+        public string ItemCode { get; set; }
+        public decimal ItemCost { get; set; }
+        public string ItemDesc { get; set; }
+
+        public override string ToString() {
+            return ItemCode;
+        }
     }
 }

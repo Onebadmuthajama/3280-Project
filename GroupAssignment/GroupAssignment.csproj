@@ -63,6 +63,8 @@
     <Compile Include="Models\clsInvoice.cs" />
     <Compile Include="Models\ItemDescription.cs" />
     <Compile Include="Models\LineItems.cs" />
+    <Compile Include="Search\clsSearchLogic.cs" />
+    <Compile Include="Search\clsSearchSQL.cs" />
     <Compile Include="Search\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>

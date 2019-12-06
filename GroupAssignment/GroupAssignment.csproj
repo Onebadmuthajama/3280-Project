@@ -60,8 +60,7 @@
     <Compile Include="Items\clsItemsSQL.cs" />
     <Compile Include="Main\clsMainLogic.cs" />
     <Compile Include="Main\clsMainSql.cs" />
-    <Compile Include="Search\clsSearchLogic.cs" />
-    <Compile Include="Search\clsSearchSQL.cs" />
+    <Compile Include="Models\clsInvoice.cs" />
     <Compile Include="Search\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>

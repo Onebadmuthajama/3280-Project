@@ -12,7 +12,7 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        /// opens the search window
+        ///     opens the search window
         /// </summary>
         /// <param name="sender">UI object</param>
         /// <param name="e">event</param>
@@ -22,20 +22,13 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        /// opens the item window
+        ///     opens the item window
         /// </summary>
         /// <param name="sender">UI object</param>
         /// <param name="e">event</param>
         private void OpenItemWindow(object sender, RoutedEventArgs e) {
             var sw = new ItemsWindow();
             sw.ShowDialog();
-        }
-
-        private void BtnToItems_Click(object sender, RoutedEventArgs e)
-        {
-            var iw = new ItemsWindow();
-            Close();
-            iw.ShowDialog();
         }
     }
 }

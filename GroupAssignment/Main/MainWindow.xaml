@@ -36,11 +36,11 @@
 
             <StackPanel Grid.Row="0" Margin="0,10,0,0" Orientation="Horizontal">
                 <Label Content="Invoice Number:" IsEnabled="false" />
-                <TextBox Text="TBD" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <TextBox Name="InvoiceIdTextBox" Text="TBD" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
                 <Label Content="Invoice Date:" IsEnabled="false"/>
-                <DatePicker VerticalContentAlignment="Center" Focusable="False" IsEnabled="False" />
+                <DatePicker Name="InvoiceDatePicker" VerticalContentAlignment="Center" Focusable="False" IsEnabled="False" />
                 <Label Content="Total Cost:" IsEnabled="false" />
-                <TextBox Text="" Width="150" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <TextBox Name="InvoiceCostTextBox" Text="" Width="150" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">

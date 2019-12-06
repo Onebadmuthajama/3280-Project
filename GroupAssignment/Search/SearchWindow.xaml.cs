@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Data;
+using GroupAssignment.Main;
 
 namespace GroupAssignment.Search {
     /// <summary>
@@ -11,7 +12,7 @@ namespace GroupAssignment.Search {
 
         EnumerableRowCollection<int> invoiceNum;
 
-        public SearchWindow() {
+        public SearchWindow(MainWindow mainWindow) {
             InitializeComponent();
 
             //start up the search logic

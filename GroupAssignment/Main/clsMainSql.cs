@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using GroupAssignment.Models;
 
 namespace GroupAssignment.Main {
@@ -30,6 +31,13 @@ namespace GroupAssignment.Main {
                 result.Add(itemDescription);
             }
 
+            return result;
+        }
+
+        public int GetLargestInvoiceId() {
+            const string sql = "select InvoiceNum from Invoices order by InvoiceNum desc";
+
+            var result = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("invoiceNum")).FirstOrDefault();
             return result;
         }
 

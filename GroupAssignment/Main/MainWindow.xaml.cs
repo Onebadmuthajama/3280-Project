@@ -10,10 +10,11 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private readonly int _invoiceId;
         private readonly List<LineItems> _items;
         private readonly clsMainLogic _mainLogic;
         private readonly clsMainSql _mainSql;
+
+        private int _invoiceId;
 
         public MainWindow() {
             _mainLogic = new clsMainLogic();
@@ -34,7 +35,7 @@ namespace GroupAssignment.Main {
         /// <param name="sender">UI object</param>
         /// <param name="e">event</param>
         private void OpenSearchWindow(object sender, RoutedEventArgs e) {
-            var sw = new SearchWindow();
+            var sw = new SearchWindow(this);
             sw.ShowDialog();
         }
 
@@ -85,7 +86,10 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NewInvoice(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            _invoiceId = _mainSql.GetLargestInvoiceId() + 1;
+            InvoiceIdTextBox.Text = _invoiceId.ToString();
+            InvoiceDatePicker.SelectedDate = DateTime.Now;
+            InvoiceCostTextBox.Text = "$0.00";
         }
 
         /// <summary>

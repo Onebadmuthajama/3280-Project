@@ -12,7 +12,7 @@ namespace GroupAssignment.Items
     {
         
         clsItemsSQL iSQL;
-        static String code;
+        static int code;
         public clsItemsLogic()
         {
             iSQL = new clsItemsSQL();
@@ -24,13 +24,13 @@ namespace GroupAssignment.Items
             return iSQL.Getitems();
         }
 
-        public void addItem(String itemDescription, String itemCost)
+        public void addItem(String itemDescription, decimal itemCost)
         {
             bumpCode();
             iSQL.addItem(code, itemDescription, itemCost);
         }
 
-        public void deleteItem(String itemCode)
+        public void deleteItem(int itemCode)
         {
             if(iSQL.inUse(itemCode) == false)
             {
@@ -43,21 +43,21 @@ namespace GroupAssignment.Items
             
         }
 
-        public void updateItem(String code, String itemDescription,String itemCost)
+        public void updateItem(int code, String itemDescription,decimal itemCost)
            
         {
-            if(itemDescription != null && itemCost != null)
+            if(itemDescription != null && itemCost != 0)
             {
-                iSQL.updateItemCost(itemCost);
-                iSQL.updateItemDesc(itemDescription);
+                iSQL.updateItemCost(code, itemCost);
+                iSQL.updateItemDesc(code, itemDescription);
             }
-            else if(itemDescription != null && itemCost == null)
+            else if(itemDescription != null && itemCost == 0)
             {
-                iSQL.updateItemDesc(itemDescription);
+                iSQL.updateItemDesc(code, itemDescription);
             }
-            else if (itemCost != null && itemDescription == null)
+            else if (itemCost != 0 && itemDescription == null)
             {
-                iSQL.updateItemCost(itemCost);
+                iSQL.updateItemCost(code, itemCost);
             }
             else
             {
@@ -67,9 +67,7 @@ namespace GroupAssignment.Items
         }
         public void bumpCode()
         {
-            int x = Int32.Parse(code);
-            x++;
-            code = x.ToString();
+            code ++;
 
         }
 

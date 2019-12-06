@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using GroupAssignment.Items;
 using GroupAssignment.Models;
 using GroupAssignment.Search;
@@ -10,21 +13,19 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private readonly int _invoiceId;
         private readonly List<LineItems> _items;
         private readonly clsMainLogic _mainLogic;
         private readonly clsMainSql _mainSql;
 
+        private int _invoiceId;
+
         public MainWindow() {
             _mainLogic = new clsMainLogic();
             _mainSql = new clsMainSql();
+            _items = new List<LineItems>();
 
             InitializeComponent();
-
             SelectItemComboBox.ItemsSource = _mainSql.GetAllItems();
-
-            _items = _mainSql.GetAllItemsForInvoice(5000);
-            _invoiceId = _items[0].InvoiceNum;
             ItemDataGrid.ItemsSource = _items;
         }
 
@@ -34,7 +35,7 @@ namespace GroupAssignment.Main {
         /// <param name="sender">UI object</param>
         /// <param name="e">event</param>
         private void OpenSearchWindow(object sender, RoutedEventArgs e) {
-            var sw = new SearchWindow();
+            var sw = new SearchWindow(this);
             sw.ShowDialog();
         }
 
@@ -54,11 +55,9 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DeleteItem(object sender, RoutedEventArgs e) {
-            var lineItem = ((LineItems) ItemDataGrid.SelectedItem);
+            var lineItem = (LineItems) ItemDataGrid.SelectedItem;
             _items.Remove(lineItem);
-
-            ItemDataGrid.ItemsSource = null;
-            ItemDataGrid.ItemsSource = _items;
+            UpdateDataGridContent();
         }
 
         /// <summary>
@@ -85,7 +84,15 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NewInvoice(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            _invoiceId = _mainSql.GetLargestInvoiceId() + 1;
+            InvoiceIdTextBox.Text = _invoiceId.ToString();
+            InvoiceDatePicker.SelectedDate = DateTime.Now;
+            InvoiceCostTextBox.Text = "$0.00";
+            ItemCostTextBox.IsEnabled = true;
+            SelectItemComboBox.IsEnabled = true;
+            AddItemButton.IsEnabled = true;
+            DeleteItemButton.IsEnabled = true;
+            ItemDataGrid.IsEnabled = true;
         }
 
         /// <summary>
@@ -114,8 +121,16 @@ namespace GroupAssignment.Main {
         private void AddItem(object sender, RoutedEventArgs e) {
             var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
             _items.Add(lineItem);
+            UpdateDataGridContent();
+        }
+
+        private void UpdateDataGridContent() {
             ItemDataGrid.ItemsSource = null;
             ItemDataGrid.ItemsSource = _items;
+        }
+
+        private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
+            ItemCostTextBox.Text = ((ItemDescription)SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
         }
     }
 }

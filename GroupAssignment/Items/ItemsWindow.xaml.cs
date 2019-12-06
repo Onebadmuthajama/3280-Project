@@ -10,8 +10,8 @@ namespace GroupAssignment.Items {
     {
         clsItemsLogic logic;
         String itemDescription;
-        String itemCost;
-        String itemCode;
+        double itemCost;
+        int itemCode;
         /// <summary>
         /// Eventually, this will be where an item will be updated, and data will be sent to the database
         /// </summary>
@@ -47,16 +47,16 @@ namespace GroupAssignment.Items {
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (!(String.IsNullOrEmpty(textBoxCode.Text))) itemCode = textBoxCode.Text;
-            else itemCode = null;
-            if (!(String.IsNullOrEmpty(textBoxCost.Text))) itemCost = textBoxCost.Text;
-            else itemCost = null;
+            if (!(String.IsNullOrEmpty(textBoxCode.Text))) itemCode = Int32.Parse(textBoxCode.Text);
+            else itemCode = 0;
+            if (!(String.IsNullOrEmpty(textBoxCost.Text))) itemCost = Double.Parse(textBoxCost.Text);
+            else itemCost = 0;
             if (!(String.IsNullOrEmpty(txtBoxDescription.Text))) itemDescription = txtBoxDescription.Text;
             else itemDescription = null;
 
             if (radioButtonAdd.IsChecked == true)
             {
-                logic.addItem(itemDescription, itemCost);
+                logic.addItem(itemDescription, System.Convert.ToDecimal(itemCost));
             }
             if (radioButtonDelete.IsChecked == true)
             {
@@ -64,7 +64,8 @@ namespace GroupAssignment.Items {
             }
             if (radioButtonUpdate.IsChecked == true)
             {
-                logic.updateItem(itemCode, itemDescription, itemCost);
+                decimal d = System.Convert.ToDecimal(itemCost);
+                logic.updateItem(itemCode, itemDescription, (System.Convert.ToDecimal(itemCost)));
             }
             updateTable();
             

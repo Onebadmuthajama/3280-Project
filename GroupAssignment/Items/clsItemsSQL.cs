@@ -20,7 +20,7 @@ namespace GroupAssignment.Items
             DataSet result = dba.ExecuteSqlStatement("select * from ItemDesc");
             return result;
         }
-        public List<string> updateItemDesc(String code)
+        public List<string> updateItemDesc(int code,string newDesc)
         {
             //need to figure out how to modify item descriptiontest from index
             var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
@@ -29,7 +29,7 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public List<string> updateItemCost(String code)
+        public List<string> updateItemCost(int code, decimal newCost)
         {
             //need to figure out how to modify item cost from index
             var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
@@ -38,7 +38,7 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public List<string> deleteItem(String code)
+        public List<string> deleteItem(int code)
         {
             //need to figure out how to delete item from index
             var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
@@ -47,7 +47,7 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public List<string> addItem(String code, String Desc, String cost)
+        public List<string> addItem(int code, String Desc, decimal cost)
         {
 
             //need to figure out how to add item to index
@@ -57,7 +57,7 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public bool inUse(String code)
+        public bool inUse(int code)
         {
             if (String.IsNullOrEmpty(usedOnInvoice(code)))
             {
@@ -68,15 +68,15 @@ namespace GroupAssignment.Items
                 return true;
             }
         }
-        public String usedOnInvoice(String code)
+        public String usedOnInvoice(int code)
         {
-            List<String> invoiceList = new List<String>();
-            List<String> compareList = new List<String>();
+            List<int> invoiceList = new List<int>();
+            List<int> compareList = new List<int>();
             int i=0;
 
-            invoiceList = dba.ExecuteSqlStatement("select ItemCode from LineItems").Tables[0].AsEnumerable().Select(x => x.Field<String>("ItemCode")).ToList();
+            invoiceList = dba.ExecuteSqlStatement("select ItemCode from LineItems").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
   
-            foreach(String s in invoiceList)
+            foreach(int s in invoiceList)
             {
                     if (s.Equals(code))
                     {
@@ -86,19 +86,19 @@ namespace GroupAssignment.Items
             }
              
             StringBuilder invoices = new StringBuilder();
-            foreach (String s in compareList)
+            foreach (int k in compareList)
             {
-                invoices.Append(s + " ");
+                invoices.Append(k + " ");
             }
             return invoices.ToString(); 
         }
-        public String getLastCode()
+        public int getLastCode()
         {
-            List<String> myList = new List<String>();
+            List<int> myList = new List<int>();
 
-            myList = dba.ExecuteSqlStatement("select ItemCode from ItemDesc").Tables[0].AsEnumerable().Select(x => x.Field<String>("ItemCode")).ToList();
+            myList = dba.ExecuteSqlStatement("select ItemCode from ItemDesc").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
 
-            String last = myList[myList.Count - 1];
+            int last = myList[myList.Count - 1];
             return last;
 
         }

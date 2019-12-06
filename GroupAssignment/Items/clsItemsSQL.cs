@@ -22,7 +22,7 @@ namespace GroupAssignment.Items
         }
         public List<string> updateItemDesc(String code)
         {
-            //need to figure out how to modify item description from index
+            //need to figure out how to modify item descriptiontest from index
             var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
                  .Where(x => x.Field<String>("Cost").Equals(code)).Select(y => y.Field<String>("ItemDesc"))
                  .ToList();

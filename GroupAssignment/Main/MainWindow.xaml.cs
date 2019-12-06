@@ -92,6 +92,8 @@ namespace GroupAssignment.Main {
             AddItemButton.IsEnabled = true;
             ItemDataGrid.IsEnabled = true;  
             NewInvoiceButton.IsEnabled = false;
+            DeleteInvoiceButton.IsEnabled = true;
+            SaveChangesButton.IsEnabled = true;
         }
 
         /// <summary>

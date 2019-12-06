@@ -31,7 +31,7 @@ namespace GroupAssignment.Search
                 {
                     InvoiceNumber = row.Field<int>("InvoiceNum"),
                     InvoiceDate = row.Field<DateTime>("InvoiceDate"),
-                    TotalCost = row.Field<decimal>("TotalCost")
+                    TotalCost = row.Field<int>("TotalCost")
                 };
 
                 result.Add(inv);

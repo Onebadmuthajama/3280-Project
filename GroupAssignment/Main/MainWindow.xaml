@@ -41,32 +41,32 @@
                 <DatePicker Name="InvoiceDatePicker" VerticalContentAlignment="Center" Focusable="False" IsEnabled="False" />
                 <Label Content="Total Cost:" IsEnabled="false" />
                 <TextBox Name="InvoiceCostTextBox" Text="" Width="150" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <!-- New invoice will only show if not in an edit state -->
+                <Button Name="NewInvoiceButton" Click="NewInvoice" Margin="10,0,0,0" Content="New Invoice" IsEnabled="True" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
                 <Label Content="Item Code:" IsEnabled="False" />
                 <ComboBox Name="SelectItemComboBox" SelectionChanged="UpdateSelectedItemTextBoxContent" Width="150" VerticalContentAlignment="Center" IsEditable="false" IsEnabled="false" />
                 <Label Content="Item Cost:" IsEnabled="False" />
-                <TextBox Name="ItemCostTextBox" Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <TextBox Name="ItemCostTextBox" Text="" Width="150" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
                 <Button Name="AddItemButton" Click="AddItem" Margin="10,0,0,0" Content="Add Item" IsEnabled="false" />
             </StackPanel>
         </Grid>
 
         <!-- DataGrid -->
-        <DataGrid Grid.Row="2" Name="ItemDataGrid" IsEnabled="false" Margin="5,10,5,0" SelectionMode="Single" AutoGenerateColumns="True" Height="425" IsReadOnly="True"/>
+        <DataGrid Grid.Row="2" Name="ItemDataGrid" SelectionChanged="UpdateDeleteItemButton" IsEnabled="false" Margin="5,10,5,0" SelectionMode="Single" AutoGenerateColumns="True" Height="425" IsReadOnly="True"/>
 
         <!-- Bottom buttons -->
         <StackPanel Grid.Row="3" Margin="5,10,0,0" Orientation="Horizontal">
-            <!-- delete item will only show if view is not read-only -->
-            <Button Name="DeleteItemButton" Click="DeleteItem" Content="Delete Item" IsEnabled="False" />
             <!-- Save changes will only show if in an edit state -->
-            <Button Name="SaveChangesButton" Click="SaveChanges" Margin="10,0,0,0" Content="Save Changes" IsEnabled="False" />
+            <Button Name="SaveChangesButton" Click="SaveChanges" Content="Save Changes" IsEnabled="False" />
             <!-- Edit invoice will only show if not in an edit state -->
             <Button Name="EditInvoiceButton" Click="EditInvoice" Margin="10,0,0,0" Content="Edit Invoice" IsEnabled="False" />
-            <!-- Save invoice will only show if not in an edit state -->
-            <Button Name="NewInvoiceButton" Click="NewInvoice" Margin="10,0,0,0" Content="New Invoice" IsEnabled="True" />
             <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
             <Button Name="DeleteInvoiceButton" Click="DeleteInvoice" Margin="10,0,0,0" Content="Delete Invoice" IsEnabled="False" />
+            <!-- delete item will only show if view is not read-only -->
+            <Button Name="DeleteItemButton" Click="DeleteItem" Margin="10,0,0,0"  Content="Delete Item" IsEnabled="False" />
             <!-- Cancel button will only show when editing a saved invoice -->
             <Button Name="CancelChangesButton" Click="CancelChanges" Margin="10,0,0,0" Content="Cancel Changes" IsEnabled="False" />
         </StackPanel>

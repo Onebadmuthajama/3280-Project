@@ -5,7 +5,7 @@
         public string ItemDesc { get; set; }
 
         public override string ToString() {
-            return ItemCode.ToString();
+            return $"{ItemCode} - {ItemDesc}";
         }
     }
 }

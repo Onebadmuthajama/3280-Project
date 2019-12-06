@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,8 +90,10 @@ namespace GroupAssignment.Main {
             ItemCostTextBox.IsEnabled = true;
             SelectItemComboBox.IsEnabled = true;
             AddItemButton.IsEnabled = true;
-            DeleteItemButton.IsEnabled = true;
-            ItemDataGrid.IsEnabled = true;
+            ItemDataGrid.IsEnabled = true;  
+            NewInvoiceButton.IsEnabled = false;
+            DeleteInvoiceButton.IsEnabled = true;
+            SaveChangesButton.IsEnabled = true;
         }
 
         /// <summary>
@@ -119,18 +120,38 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddItem(object sender, RoutedEventArgs e) {
+            var totalCost = new decimal(0.00);
             var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
             _items.Add(lineItem);
+            totalCost += _items.Sum(item => item.ItemCost);
+            InvoiceCostTextBox.Text = totalCost.ToString("$0.00");
             UpdateDataGridContent();
         }
 
+        /// <summary>
+        ///     Used to refresh the UI when the dataSource for the DataGrid is updated
+        /// </summary>
         private void UpdateDataGridContent() {
             ItemDataGrid.ItemsSource = null;
             ItemDataGrid.ItemsSource = _items;
         }
 
+        /// <summary>
+        ///     Event handler used to update the item cost TextBox when a new item is selected from the ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="selectionChangedEventArgs"></param>
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
-            ItemCostTextBox.Text = ((ItemDescription)SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+            ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+        }
+
+        /// <summary>
+        ///     Event handler used to update the status of the DeleteItemButton based on if a row is selected on the DataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateDeleteItemButton(object sender, SelectionChangedEventArgs e) {
+            DeleteItemButton.IsEnabled = ((DataGrid) sender).SelectedItems.Count >= 1;
         }
     }
 }

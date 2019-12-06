@@ -26,8 +26,8 @@ namespace GroupAssignment {
         public clsDataAccess() {
             _connectionString =
                 $@"Provider=Microsoft.Jet.OLEDB.4.0; Data source={Directory.GetCurrentDirectory()}\\Invoice.mdb";
-            //                $@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source={Directory.GetCurrentDirectory()}\\ReservationSystem.mdb";
         }
+
         public DataSet ExecuteSqlStatement(string sql) {
             try {
                 //Create a new DataSet

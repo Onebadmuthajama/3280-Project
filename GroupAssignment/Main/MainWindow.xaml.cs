@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,6 +92,7 @@ namespace GroupAssignment.Main {
             AddItemButton.IsEnabled = true;
             DeleteItemButton.IsEnabled = true;
             ItemDataGrid.IsEnabled = true;
+            NewInvoiceButton.IsEnabled = false;
         }
 
         /// <summary>
@@ -119,8 +119,11 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddItem(object sender, RoutedEventArgs e) {
+            var totalCost = new decimal(0.00);
             var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
             _items.Add(lineItem);
+            totalCost += _items.Sum(item => item.ItemCost);
+            InvoiceCostTextBox.Text = totalCost.ToString("$0.00");
             UpdateDataGridContent();
         }
 
@@ -130,7 +133,7 @@ namespace GroupAssignment.Main {
         }
 
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
-            ItemCostTextBox.Text = ((ItemDescription)SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+            ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
         }
     }
 }

@@ -35,40 +35,40 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Margin="0,10,0,0" Orientation="Horizontal">
-                <Label Content="Invoice Number:" />
-                <TextBox Text="TBD" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
-                <Label Content="Invoice Date:" />
-                <DatePicker VerticalContentAlignment="Center" Focusable="False" />
-                <Label Content="Total Cost:" />
-                <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
+                <Label Content="Invoice Number:" IsEnabled="false" />
+                <TextBox Text="TBD" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <Label Content="Invoice Date:" IsEnabled="false"/>
+                <DatePicker VerticalContentAlignment="Center" Focusable="False" IsEnabled="False" />
+                <Label Content="Total Cost:" IsEnabled="false" />
+                <TextBox Text="" Width="150" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
-                <Label Content="Item Code:" />
-                <ComboBox Name="SelectItemComboBox" Width="150" VerticalContentAlignment="Center" IsEditable="True" />
-                <Label Content="Item Cost:" />
-                <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsReadOnly="True" />
-                <Button Click="AddItem" Margin="10,0,0,0" Content="Add" />
+                <Label Content="Item Code:" IsEnabled="False" />
+                <ComboBox Name="SelectItemComboBox" Width="150" VerticalContentAlignment="Center" IsEditable="false" IsEnabled="false" />
+                <Label Content="Item Cost:" IsEnabled="False" />
+                <TextBox Text="" Width="150" FontWeight="Bold" VerticalContentAlignment="Center" IsEnabled="False" IsReadOnly="True" />
+                <Button Click="AddItem" Margin="10,0,0,0" Content="Add" IsEnabled="false" />
             </StackPanel>
         </Grid>
 
         <!-- DataGrid -->
-        <DataGrid Grid.Row="2" Name="ItemDataGrid" Margin="5,10,5,0" AutoGenerateColumns="True" Height="425" IsReadOnly="True"/>
+        <DataGrid Grid.Row="2" Name="ItemDataGrid" IsEnabled="false" Margin="5,10,5,0" AutoGenerateColumns="True" Height="425" IsReadOnly="True"/>
 
         <!-- Bottom buttons -->
         <StackPanel Grid.Row="3" Margin="5,10,0,0" Orientation="Horizontal">
             <!-- delete item will only show if view is not read-only -->
-            <Button Click="DeleteItem" Content="Delete Item" />
+            <Button Click="DeleteItem" Content="Delete Item" IsEnabled="False" />
             <!-- Save changes will only show if in an edit state -->
-            <Button Click="SaveChanges" Margin="10,0,0,0" Content="Save Changes" />
+            <Button Click="SaveChanges" Margin="10,0,0,0" Content="Save Changes" IsEnabled="False" />
             <!-- Edit invoice will only show if not in an edit state -->
-            <Button Click="EditInvoice" Margin="10,0,0,0" Content="Edit Invoice" />
+            <Button Click="EditInvoice" Margin="10,0,0,0" Content="Edit Invoice" IsEnabled="False" />
             <!-- Save invoice will only show if not in an edit state -->
-            <Button Click="SaveInvoice" Margin="10,0,0,0" Content="Save Invoice" />
+            <Button Click="NewInvoice" Margin="10,0,0,0" Content="New Invoice" IsEnabled="True" />
             <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
-            <Button Click="DeleteInvoice" Margin="10,0,0,0" Content="Delete Invoice" />
+            <Button Click="DeleteInvoice" Margin="10,0,0,0" Content="Delete Invoice" IsEnabled="False" />
             <!-- Cancel button will only show when editing a saved invoice -->
-            <Button Click="CancelChanges" Margin="10,0,0,0" Content="Cancel Changes" />
+            <Button Click="CancelChanges" Margin="10,0,0,0" Content="Cancel Changes" IsEnabled="False" />
         </StackPanel>
     </Grid>
 </Window>

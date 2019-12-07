@@ -12,7 +12,7 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private readonly List<LineItems> _items;
+        private List<LineItems> _items;
         private readonly clsMainLogic _mainLogic;
         private readonly clsMainSql _mainSql;
 
@@ -102,7 +102,21 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DeleteInvoice(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            _mainSql.DeleteInvoice(_invoiceId);
+            InvoiceIdTextBox.Text = "TBD";
+            InvoiceDatePicker.SelectedDate = null;
+            InvoiceCostTextBox.Text = string.Empty;
+            ItemCostTextBox.IsEnabled = false;
+            SelectItemComboBox.IsEnabled = false;
+            AddItemButton.IsEnabled = false;
+            ItemDataGrid.IsEnabled = false;
+            NewInvoiceButton.IsEnabled = true;
+            DeleteInvoiceButton.IsEnabled = false;
+            SaveChangesButton.IsEnabled = false;
+            SelectItemComboBox.SelectedItem = null;
+            ItemCostTextBox.Text = string.Empty;
+            _items = new List<LineItems>();
+            UpdateDataGridContent();
         }
 
         /// <summary>
@@ -142,6 +156,7 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="selectionChangedEventArgs"></param>
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
+            // update this method to handle nulls
             ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
         }
 

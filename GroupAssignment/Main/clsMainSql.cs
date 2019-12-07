@@ -95,6 +95,8 @@ namespace GroupAssignment.Main {
             _dataAccess.ExecuteNonQuery(sql);
 
             foreach (var item in items) {
+                sql = ($"Delete from [LineItems] where LineItemNum = {item.LineItemNum};");
+                _dataAccess.ExecuteNonQuery(sql);
                 sql = ($"Insert Into [LineItems] (InvoiceNum, LineItemNum, ItemCode) Values({item.InvoiceNum}, {item.LineItemNum}, {item.ItemCode});");
                 _dataAccess.ExecuteNonQuery(sql);
             }

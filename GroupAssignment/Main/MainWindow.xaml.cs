@@ -18,6 +18,7 @@ namespace GroupAssignment.Main {
 
         private int _invoiceId;
         private int _lineItemId;
+        private int _dataGridItemCount;
 
         public MainWindow() {
             _mainLogic = new clsMainLogic();
@@ -74,6 +75,8 @@ namespace GroupAssignment.Main {
             };
 
             _mainSql.AddInvoice(invoice, _items);
+            SaveChangesButton.IsEnabled = false;
+            _dataGridItemCount = ItemDataGrid.Items.Count;
         }
 
         /// <summary>
@@ -149,8 +152,10 @@ namespace GroupAssignment.Main {
 
             _lineItemId += 1;
             lineItem.LineItemNum = _lineItemId;
+
             _items.Add(lineItem);
             totalCost += _items.Sum(item => item.ItemCost);
+
             InvoiceCostTextBox.Text = totalCost.ToString("$0.00");
             UpdateDataGridContent();
         }
@@ -185,6 +190,9 @@ namespace GroupAssignment.Main {
         /// <param name="e"></param>
         private void UpdateDeleteItemButton(object sender, SelectionChangedEventArgs e) {
             DeleteItemButton.IsEnabled = ((DataGrid) sender).SelectedItems.Count >= 1;
+            if (_dataGridItemCount != ItemDataGrid.Items.Count) {
+                SaveChangesButton.IsEnabled = true;
+            }
         }
     }
 }

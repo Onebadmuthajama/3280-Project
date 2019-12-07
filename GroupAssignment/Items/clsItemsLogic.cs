@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using GroupAssignment.Models;
 
 namespace GroupAssignment.Items
 {
@@ -19,9 +20,9 @@ namespace GroupAssignment.Items
             //code = iSQL.getLastCode();
         }
 
-        public DataSet getItems()
+        public LineItems getItems()
         {
-            return iSQL.Getitems();
+            return iSQL.GetAllItemsForItems();
         }
 
         public void addItem(String itemDescription, decimal itemCost)
@@ -70,12 +71,18 @@ namespace GroupAssignment.Items
             code ++;
 
         }
+        public LineItems ParseItemDesc(ItemDescription itemDescription, int invoiceId)
+        {
+            var lineItem = new LineItems
+            {
+                InvoiceNum = invoiceId,
+                ItemCode = itemDescription.ItemCode,
+                LineItemNum = itemDescription.ItemCode,
+                ItemCost = itemDescription.ItemCost
+            };
 
-        
+            return lineItem;
 
-
-
-
-
-    }
+        }
+        }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Data;
+using GroupAssignment.Models;
+using System.Collections.Generic;
 
 namespace GroupAssignment.Items {
     /// <summary>
@@ -12,6 +14,7 @@ namespace GroupAssignment.Items {
         String itemDescription;
         double itemCost;
         int itemCode;
+        private List<LineItems> _items;
         /// <summary>
         /// Eventually, this will be where an item will be updated, and data will be sent to the database
         /// </summary>
@@ -19,6 +22,7 @@ namespace GroupAssignment.Items {
 
         public ItemsWindow()
         {
+            _items = new List<LineItems>();
             logic = new clsItemsLogic();
             InitializeComponent();
           //  updateTable();
@@ -80,8 +84,12 @@ namespace GroupAssignment.Items {
 
         public void updateTable()
         {
-         //   DataGridItems.DataContext = logic.getItems();
+            
+            DataGridItems.ItemsSource = null;
+            DataGridItems.ItemsSource = _items;
+            //logic.getItems()
         }
+
 
 
     }

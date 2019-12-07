@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GroupAssignment.Models;
 
 namespace GroupAssignment.Items
 {
@@ -102,7 +103,29 @@ namespace GroupAssignment.Items
             return last;
 
         }
-    }
+        public List<LineItems> GetAllItemsForItems()
+        {
+            //var sql = "SELECT ItemDesc.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost, LineItems.InvoiceNum FROM ItemDesc INNER JOIN LineItems ON LineItems.ItemCode = ItemDesc.ItemCode;";
+
+            //var result = new List<LineItems>();
+            //var ds = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
+
+            //foreach (var row in ds)
+            //{
+            //    var itemDescription = new LineItems
+            //    {
+            //        ItemCode = row.Field<int>("ItemCode"),
+            //        ItemDesc = row.Field<String>("ItemDesc"),
+            //        Cost = row.Field<decimal>("Cost"),
+            //        InvoiceNum = row.Field<int>("InvoiceNum")
+            //    };
+
+            //    result.Add(itemDescription);
+            //}
+
+            return null;
+        }
+        }
 }
 
 

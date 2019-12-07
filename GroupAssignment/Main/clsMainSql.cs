@@ -34,13 +34,6 @@ namespace GroupAssignment.Main {
             return result;
         }
 
-        public decimal GetItemCostByItemCode(int itemCode) {
-            var sql = $"select cost from ItemDesc where itemCode = {itemCode}";
-
-            var result = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<decimal>("Cost")).FirstOrDefault();
-            return result;
-        }
-
         /// <summary>
         ///     Returns an int representing the largest invoiceNum in the database
         /// </summary>

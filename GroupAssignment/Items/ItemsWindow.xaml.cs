@@ -15,6 +15,7 @@ namespace GroupAssignment.Items {
         double _itemCost;
         private int _itemCode;
         private readonly List<ItemDescription> _items;
+
         /// <summary>
         /// Eventually, this will be where an item will be updated, and data will be sent to the database
         /// </summary>
@@ -74,6 +75,7 @@ namespace GroupAssignment.Items {
                 _logic.updateItem(_itemCode, _itemDescription, (System.Convert.ToDecimal(_itemCost)));
             }
             updateTable();
+
             
 
 
@@ -88,6 +90,7 @@ namespace GroupAssignment.Items {
         {
             DataGridItems.ItemsSource = null;
             DataGridItems.ItemsSource = _items;
+    
         }
 
 

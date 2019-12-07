@@ -50,10 +50,9 @@ namespace GroupAssignment.Items
         }
         public void addItem(int code, String desc, decimal cost)
         {
-
-            dba.ExecuteSqlStatement("INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES("+code+","+ desc+","+ cost);
-
+            dba.ExecuteSqlStatement($"INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES({code},{desc},{cost})");
         }
+
         public bool inUse(int code)
         {
             if (String.IsNullOrEmpty(usedOnInvoice(code)))

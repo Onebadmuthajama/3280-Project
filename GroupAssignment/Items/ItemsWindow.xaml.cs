@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace GroupAssignment.Items {
     /// <summary>
-    ///     Interaction logic for ItemsWindow.xaml
+    ///     This is where the item is displayed, selected, deleted, updated, and added. 
     /// </summary>
     public partial class ItemsWindow : Window {
         private readonly clsItemsLogic _logic;
@@ -15,9 +15,10 @@ namespace GroupAssignment.Items {
         private ItemDescription _item;
 
         /// <summary>
-        ///     Eventually, this will be where an item will be updated, and data will be sent to the database
+        ///     initilizes items logic and sql, then fills datagrid with feteched items  
         /// </summary>
         public ItemsWindow() {
+
             _items = new List<ItemDescription>();
             _logic = new clsItemsLogic();
             _item = new ItemDescription();
@@ -27,7 +28,11 @@ namespace GroupAssignment.Items {
             _items = _logic.GetItems();
             DataGridItems.ItemsSource = _items;
         }
-
+        /// <summary>
+        /// sends text to datagrid items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridItems_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (DataGridItems.SelectedItem == null) {
                 return;
@@ -37,29 +42,50 @@ namespace GroupAssignment.Items {
             textBoxCost.Text = ((ItemDescription)DataGridItems.SelectedItem).ItemCost.ToString();
             textBoxDescription.Text = ((ItemDescription)DataGridItems.SelectedItem).ItemDesc;
         }
-
+        /// <summary>
+        /// determines what user wants to do based on radioButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonDelete_Checked(object sender, RoutedEventArgs e) {
             textBoxCode.IsEnabled = true;
             textBoxDescription.IsEnabled = false;
             textBoxCost.IsEnabled = false;
         }
-
+        /// <summary>
+        /// determines what user wants to do based on radioButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonUpdate_Checked(object sender, RoutedEventArgs e) {
             textBoxCode.IsEnabled = false;
             textBoxDescription.IsEnabled = true;
             textBoxCost.IsEnabled = true;
         }
-
+        /// <summary>
+        /// determines what user wants to do based on radioButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButtonAdd_Checked(object sender, RoutedEventArgs e) {
             textBoxCode.IsEnabled = false;
             textBoxDescription.IsEnabled = true;
             textBoxCost.IsEnabled = true;
         }
-
+        /// <summary>
+        /// goes back to menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackToMenu_Click(object sender, RoutedEventArgs e) {
             Close();
         }
-
+        /// <summary>
+        /// event is based on previous methods. if update will update description and or cost based on itemCode. if new will add new item with auto 
+        /// generated itemCode, inputed descritpion and cost. If delete will delete based on ItemCode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAdd_Click(object sender, RoutedEventArgs e) {
             _item.ItemDesc = textBoxDescription.Text;
             _item.ItemCode = _logic.GetId();
@@ -87,7 +113,10 @@ namespace GroupAssignment.Items {
 
             UpdateTable();
         }
-
+        /// <summary>
+        /// validate user input to make sure they are only using numbers in cost and code
+        /// </summary>
+        /// <param name="action"></param>
         private void Validate(string action) {
             int.TryParse(textBoxCode.Text, out var i);
             MessageBox.Show($"{action} is a number only field");
@@ -108,6 +137,10 @@ namespace GroupAssignment.Items {
 
             return true;
         }
+        /// <summary>
+        /// used to validate the input when user selects update
+        /// </summary>
+        /// <returns></returns>
 
         private bool ValidateUpdate() {
             try {
@@ -124,7 +157,10 @@ namespace GroupAssignment.Items {
 
             return true;
         }
-
+        /// <summary>
+        /// used to validate input when user selects delete
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateDelete() {
             try {
                 int.Parse(textBoxCode.Text);
@@ -138,6 +174,9 @@ namespace GroupAssignment.Items {
 
             return true;
         }
+        /// <summary>
+        /// updates table after items have been updated, added, or deleted
+        /// </summary>
 
         private void UpdateTable() {
             DataGridItems.ItemsSource = null;

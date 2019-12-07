@@ -12,12 +12,33 @@ namespace GroupAssignment.Main {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        /// <summary>
+        ///     Creates an empty list of LineItems
+        /// </summary>
         private List<LineItems> _items;
+
+        /// <summary>
+        ///     Creates an instance of clsMainLogic
+        /// </summary>
         private readonly clsMainLogic _mainLogic;
+
+        /// <summary>
+        ///     Creates an instance of clsMainSql
+        /// </summary>
         private readonly clsMainSql _mainSql;
 
+        /// <summary>
+        ///     Tracks the InvoiceNum for the current invoice
+        /// </summary>
         private int _invoiceId;
+        /// <summary>
+        ///     Tracks the LineItemNum for adding LineItems
+        /// </summary>
         private int _lineItemId;
+        
+        /// <summary>
+        ///     Tracks the number of data grid items when save changes is clicked to compare when determining the isEnabled state of the SaveChangesButton
+        /// </summary>
         private int _dataGridItemCount;
 
         public MainWindow() {
@@ -80,15 +101,6 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        ///     Event Handler for the Edit Invoice button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditInvoice(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         ///     Event Handler for the New Invoice button
         /// </summary>
         /// <param name="sender"></param>
@@ -126,17 +138,9 @@ namespace GroupAssignment.Main {
             SaveChangesButton.IsEnabled = false;
             SelectItemComboBox.SelectedItem = null;
             ItemCostTextBox.Text = string.Empty;
+
             _items = new List<LineItems>();
             UpdateDataGridContent();
-        }
-
-        /// <summary>
-        ///     Event Handler for the Cancel Changes button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CancelChanges(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace GroupAssignment.Main {
             if (!(SelectItemComboBox.SelectedItem is ItemDescription)) return;
 
             var totalCost = new decimal(0.00);
-            var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
+            var lineItem = _mainLogic.ParseItemDescriptionToLineItem((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
 
             _lineItemId += 1;
             lineItem.LineItemNum = _lineItemId;
@@ -190,7 +194,7 @@ namespace GroupAssignment.Main {
         /// <param name="e"></param>
         private void UpdateDeleteItemButton(object sender, SelectionChangedEventArgs e) {
             DeleteItemButton.IsEnabled = ((DataGrid) sender).SelectedItems.Count >= 1;
-            if (_dataGridItemCount != ItemDataGrid.Items.Count) {
+            if (_dataGridItemCount != _items.Count) {
                 SaveChangesButton.IsEnabled = true;
             }
         }

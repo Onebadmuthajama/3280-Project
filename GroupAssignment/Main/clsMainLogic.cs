@@ -5,7 +5,13 @@ namespace GroupAssignment.Main {
         public clsMainLogic() {
         }
 
-        public LineItems ParseItemDesc(ItemDescription itemDescription, int invoiceId) {
+        /// <summary>
+        ///     Converts an ItemDescription object to a LineItems object
+        /// </summary>
+        /// <param name="itemDescription"></param>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
+        public LineItems ParseItemDescriptionToLineItem(ItemDescription itemDescription, int invoiceId) {
             var lineItem = new LineItems {
                 InvoiceNum = invoiceId,
                 ItemCode = itemDescription.ItemCode,

@@ -61,14 +61,14 @@
         <StackPanel Grid.Row="3" Margin="5,10,0,0" Orientation="Horizontal">
             <!-- Save changes will only show if in an edit state -->
             <Button Name="SaveChangesButton" Click="SaveChanges" Content="Save Changes" IsEnabled="False" />
-            <!-- Edit invoice will only show if not in an edit state -->
-            <Button Name="EditInvoiceButton" Click="EditInvoice" Margin="10,0,0,0" Content="Edit Invoice" IsEnabled="False" />
-            <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
-            <Button Name="DeleteInvoiceButton" Click="DeleteInvoice" Margin="10,0,0,0" Content="Delete Invoice" IsEnabled="False" />
             <!-- delete item will only show if view is not read-only -->
-            <Button Name="DeleteItemButton" Click="DeleteItem" Margin="10,0,0,0"  Content="Delete Item" IsEnabled="False" />
-            <!-- Cancel button will only show when editing a saved invoice -->
-            <Button Name="CancelChangesButton" Click="CancelChanges" Margin="10,0,0,0" Content="Cancel Changes" IsEnabled="False" />
+            <Button Name="DeleteItemButton" Click="DeleteItem" Margin="10,0,0,0" Content="Delete Item" IsEnabled="False" />
         </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="5,10,0,0" HorizontalAlignment="Right"> 
+            <!-- Delete invoice will always show, if unsaved, it will clear the selection -->
+            <Button Name="DeleteInvoiceButton" Click="DeleteInvoice" Margin="0,0,10,0" Content="Delete Invoice" IsEnabled="False" />
+        </StackPanel>
+
     </Grid>
 </Window>

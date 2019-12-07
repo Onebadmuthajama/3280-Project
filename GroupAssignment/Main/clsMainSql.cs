@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using GroupAssignment.Models;
 
 namespace GroupAssignment.Main {
@@ -59,29 +57,10 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
-        ///     Returns a list of LineItem object
+        ///     Deletes the invoice from the database for the passed in Id
         /// </summary>
+        /// <param name="invoiceId"></param>
         /// <returns></returns>
-        public List<LineItems> GetAllItemsForInvoice(int invoiceId) {
-            var sql = $"SELECT LineItems.InvoiceNum, LineItems.LineItemNum, LineItems.ItemCode, ItemDesc.Cost FROM LineItems INNER JOIN ItemDesc ON LineItems.ItemCode = ItemDesc.ItemCode WHERE LineItems.InvoiceNum = {invoiceId};";
-
-            var result = new List<LineItems>();
-            var ds = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
-
-            foreach (var row in ds) {
-                var itemDescription = new LineItems {
-                    InvoiceNum = row.Field<int>("InvoiceNum"),
-                    LineItemNum = row.Field<int>("LineItemNum"),
-                    ItemCode = row.Field<int>("ItemCode"),
-                    ItemCost = row.Field<decimal>("Cost")
-                };
-
-                result.Add(itemDescription);
-            }
-
-            return result;
-        }
-
         public int DeleteInvoice(int invoiceId) {
             var sql = $"Delete from Invoices where InvoiceNum = {invoiceId}";
 
@@ -90,13 +69,21 @@ namespace GroupAssignment.Main {
             return result;
         }
 
+        /// <summary>
+        ///     Deletes invoice, and child rows associated to the invoice, then adds the invoice + children.  The order of operations is there to handle updates.
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <param name="items"></param>
         public void AddInvoice(Invoice invoice, List<LineItems> items) {
             var sql = ($"Insert Into [Invoices] (InvoiceNum, InvoiceDate, TotalCost) Values({invoice.InvoiceNumber}, {invoice.InvoiceDate.Value:MM/dd/yyyy}, {invoice.TotalCost});");
+            DeleteInvoice(invoice.InvoiceNumber);
+
+            _dataAccess.ExecuteNonQuery(sql);
+
+            sql = ($"Delete from [LineItems] where InvoiceNum = {invoice.InvoiceNumber};");
             _dataAccess.ExecuteNonQuery(sql);
 
             foreach (var item in items) {
-                sql = ($"Delete from [LineItems] where LineItemNum = {item.LineItemNum};");
-                _dataAccess.ExecuteNonQuery(sql);
                 sql = ($"Insert Into [LineItems] (InvoiceNum, LineItemNum, ItemCode) Values({item.InvoiceNum}, {item.LineItemNum}, {item.ItemCode});");
                 _dataAccess.ExecuteNonQuery(sql);
             }

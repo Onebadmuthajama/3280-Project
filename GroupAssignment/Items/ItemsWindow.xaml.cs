@@ -101,50 +101,33 @@ namespace GroupAssignment.Items {
             this.Hide();
         }
 
-        public void updateTable()
-        {
+        public void updateTable() {
             DataGridItems.ItemsSource = null;
             DataGridItems.ItemsSource = _items;
-    
         }
 
-        public void validateCode()
-        {
+        public void validateCode() {
             int i;
-            if (!int.TryParse(textBoxCode.Text, out i))
-            {
+            if (!int.TryParse(textBoxCode.Text, out i)) {
                 MessageBox.Show("Code is a number only field");
                 textBoxCode.Text = "";
                 key = 0;
- 
             }
-            else
-            {
+            else {
                 key = 1;
- 
             }
         }
 
-        public void validateCost()
-        {
+        public void validateCost() {
             decimal d;
-            if (decimal.TryParse(textBoxCost.Text, out d))
-            {
+            if (decimal.TryParse(textBoxCost.Text, out d)) {
                 MessageBox.Show("Cost is a decimal only field");
                 textBoxCost.Text = "";
                 key = 0;
-  
             }
-            else
-            {
+            else {
                 key = 1;
-
-                
             }
-
-        } 
-
-
-
+        }
     }
 }

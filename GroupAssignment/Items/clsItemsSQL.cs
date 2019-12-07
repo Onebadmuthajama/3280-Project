@@ -90,7 +90,7 @@ namespace GroupAssignment.Items
         {
             const string sql = "select ItemCode from ItemDesc order by ItemCode desc";
 
-            var result = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("invoiceNum")).FirstOrDefault();
+            var result = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).FirstOrDefault();
             return result;
         }
 

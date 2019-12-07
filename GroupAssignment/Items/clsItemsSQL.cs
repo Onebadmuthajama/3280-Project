@@ -1,110 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using GroupAssignment.Models;
 
-namespace GroupAssignment.Items
-{
-    class clsItemsSQL
-    {
-        clsDataAccess dba;
+namespace GroupAssignment.Items {
+    internal class clsItemsSQL {
+        private readonly clsDataAccess _dba;
 
-        public clsItemsSQL()
-        {
-            dba = new clsDataAccess();
+        public clsItemsSQL() {
+            _dba = new clsDataAccess();
         }
 
-        public List<string> updateItemDesc(int code,string newDesc)
-        {
-            //need to figure out how to modify item descriptiontest from index
-            var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
-                 .Where(x => x.Field<String>("Cost").Equals(code)).Select(y => y.Field<String>("ItemDesc"))
-                 .ToList();
-
-            return result;
-        }
-        public List<string> updateItemCost(int code, decimal newCost)
-        {
-            //need to figure out how to modify item cost from index
-            var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
-                 .Where(x => x.Field<String>("Cost").Equals(code)).Select(y => y.Field<String>("ItemDesc"))
-                 .ToList();
-
-            return result;
-        }
-        public int deleteItem(int code)
-        {
-       
-                var sql = $"Delete from ItemDesc where ItemCode = {code}";
-
-                var result = dba.ExecuteNonQuery(sql);
-
-                return result; 
-        }
-        public void addItem(int code, String desc, decimal cost)
-        {
-
-            dba.ExecuteSqlStatement($"INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES({code},{ desc},{ cost}");
-
-        }
-        public bool inUse(int code)
-        {
-            if (String.IsNullOrEmpty(usedOnInvoice(code)))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        public String usedOnInvoice(int code)
-        {
-            List<int> invoiceList = new List<int>();
-            List<int> compareList = new List<int>();
-            int i=0;
-
-            invoiceList = dba.ExecuteSqlStatement("select ItemCode from LineItems").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
-  
-            foreach(int s in invoiceList)
-            {
-                    if (s.Equals(code))
-                    {
-                        compareList.Add(s);
-                    }
-                    i++;
-            }
-             
-            StringBuilder invoices = new StringBuilder();
-            foreach (int k in compareList)
-            {
-                invoices.Append(k + " ");
-            }
-            return invoices.ToString(); 
-        }
-
-        public int getLastCode()
-        {
-            const string sql = "select ItemCode from ItemDesc order by ItemCode desc";
-
-            var result = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).FirstOrDefault();
-            return result;
-        }
-
-        public List<ItemDescription> GetAllItemsForItems() {
+        public List<ItemDescription> GetItems() {
             const string sql = "SELECT * FROM ItemDesc";
 
             var result = new List<ItemDescription>();
-            var ds = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
+            var ds = _dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
 
             foreach (var row in ds) {
                 var itemDescription = new ItemDescription {
                     ItemCode = row.Field<int>("ItemCode"),
                     ItemDesc = row.Field<string>("ItemDesc"),
-                    ItemCost=  row.Field<decimal>("Cost")
+                    ItemCost = row.Field<decimal>("Cost")
                 };
 
                 result.Add(itemDescription);
@@ -113,6 +31,56 @@ namespace GroupAssignment.Items
             return result;
         }
 
+        public void AddItem(ItemDescription item) {
+            _dba.ExecuteSqlStatement($"INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost) VALUES({item.ItemCode}, '{item.ItemDesc}', {item.ItemCost})");
+        }
+
+        public int DeleteItem(int code) {
+            var sql = $"Delete from ItemDesc where ItemCode = {code}";
+            var result = _dba.ExecuteNonQuery(sql);
+
+            return result;
+        }
+
+        public void UpdateItem(ItemDescription item) {
+            DeleteItem(item.ItemCode);
+            AddItem(item);
+        }
+
+        public bool InUse(int code) {
+            if (string.IsNullOrEmpty(UsedOnInvoice(code))) {
+                return false;
+            }
+
+            return true;
+        }
+
+        public string UsedOnInvoice(int code) {
+            var compareList = new List<int>();
+
+            var invoiceList = _dba.ExecuteSqlStatement("select ItemCode from LineItems").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
+  
+            foreach(var s in invoiceList) {
+                if (s.Equals(code)) {
+                    compareList.Add(s);
+                }
+            }
+             
+            var invoices = new StringBuilder();
+
+            foreach (var k in compareList) {
+                invoices.Append(k + " ");
+            }
+
+            return invoices.ToString();
+        }
+
+        public int GetLastCode() {
+            const string sql = "select ItemCode from ItemDesc order by ItemCode desc";
+
+            var result = _dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).FirstOrDefault();
+            return result;
+        }
     }
 }
 

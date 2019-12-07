@@ -16,11 +16,7 @@ namespace GroupAssignment.Items
         {
             dba = new clsDataAccess();
         }
-        public DataSet Getitems()
-        {
-            DataSet result = dba.ExecuteSqlStatement("select * from ItemDesc");
-            return result;
-        }
+
         public List<string> updateItemDesc(int code,string newDesc)
         {
             //need to figure out how to modify item descriptiontest from index
@@ -39,14 +35,14 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public List<string> deleteItem(int code)
+        public int deleteItem(int code)
         {
-            //need to figure out how to delete item from index
-            var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
-                 .Where(x => x.Field<String>("Cost").Equals(code)).Select(y => y.Field<String>("ItemDesc"))
-                 .ToList();
+       
+                var sql = $"Delete from ItemDesc where ItemCode = {code}";
 
-            return result;
+                var result = dba.ExecuteNonQuery(sql);
+
+                return result; 
         }
         public void addItem(int code, String desc, decimal cost)
         {
@@ -116,6 +112,7 @@ namespace GroupAssignment.Items
 
             return result;
         }
+
     }
 }
 

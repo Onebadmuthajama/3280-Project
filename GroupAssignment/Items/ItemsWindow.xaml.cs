@@ -15,6 +15,7 @@ namespace GroupAssignment.Items {
         double _itemCost;
         private int _itemCode;
         private readonly List<ItemDescription> _items;
+        int key;
 
         /// <summary>
         /// Eventually, this will be where an item will be updated, and data will be sent to the database
@@ -54,32 +55,46 @@ namespace GroupAssignment.Items {
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (!(String.IsNullOrEmpty(textBoxCode.Text))) _itemCode = Int32.Parse(textBoxCode.Text);
+            key = 1;
+
+            if ((!(String.IsNullOrEmpty(textBoxCode.Text))))
+            {
+                validateCode();
+                _itemCode = Int32.Parse(textBoxCode.Text);
+            }
             else _itemCode = 0;
-            if (!(String.IsNullOrEmpty(textBoxCost.Text))) _itemCost = Double.Parse(textBoxCost.Text);
+            if ((!(String.IsNullOrEmpty(textBoxCost.Text))))
+            {
+                validateCost();
+                    _itemCost = Double.Parse(textBoxCost.Text);
+
+            }
             else _itemCost = 0;
-            if (!(String.IsNullOrEmpty(txtBoxDescription.Text))) _itemDescription = txtBoxDescription.Text;
+            if (!(String.IsNullOrEmpty(txtBoxDescription.Text)))
+            {
+                _itemDescription = txtBoxDescription.Text;
+            }
             else _itemDescription = null;
 
-            if (radioButtonAdd.IsChecked == true)
+            if (key == 1)
             {
-                _logic.addItem(_itemDescription, System.Convert.ToDecimal(_itemCost));
-            }
-            if (radioButtonDelete.IsChecked == true)
-            {
-                _logic.deleteItem(_itemCode);
-            }
-            if (radioButtonUpdate.IsChecked == true)
-            {
-                decimal d = System.Convert.ToDecimal(_itemCost);
-                _logic.updateItem(_itemCode, _itemDescription, (System.Convert.ToDecimal(_itemCost)));
-            }
-            updateTable();
 
-            
-
-
-        }
+                if (radioButtonAdd.IsChecked == true)
+                {
+                    _logic.addItem(_itemDescription, System.Convert.ToDecimal(_itemCost));
+                }
+                if (radioButtonDelete.IsChecked == true)
+                {
+                    _logic.deleteItem(_itemCode);
+                }
+                if (radioButtonUpdate.IsChecked == true)
+                {
+                    decimal d = System.Convert.ToDecimal(_itemCost);
+                    _logic.updateItem(_itemCode, _itemDescription, (System.Convert.ToDecimal(_itemCost)));
+                }
+                updateTable();
+            }
+            }        
 
         private void BtnBackToMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -92,6 +107,42 @@ namespace GroupAssignment.Items {
             DataGridItems.ItemsSource = _items;
     
         }
+
+        public void validateCode()
+        {
+            int i;
+            if (!int.TryParse(textBoxCode.Text, out i))
+            {
+                MessageBox.Show("Code is a number only field");
+                textBoxCode.Text = "";
+                key = 0;
+ 
+            }
+            else
+            {
+                key = 1;
+ 
+            }
+        }
+
+        public void validateCost()
+        {
+            decimal d;
+            if (decimal.TryParse(textBoxCost.Text, out d))
+            {
+                MessageBox.Show("Cost is a decimal only field");
+                textBoxCost.Text = "";
+                key = 0;
+  
+            }
+            else
+            {
+                key = 1;
+
+                
+            }
+
+        } 
 
 
 

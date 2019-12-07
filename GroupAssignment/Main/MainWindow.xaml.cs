@@ -134,6 +134,8 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddItem(object sender, RoutedEventArgs e) {
+            if (!(SelectItemComboBox.SelectedItem is ItemDescription)) return;
+
             var totalCost = new decimal(0.00);
             var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
             _items.Add(lineItem);
@@ -156,8 +158,13 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="selectionChangedEventArgs"></param>
         private void UpdateSelectedItemTextBoxContent(object sender, SelectionChangedEventArgs selectionChangedEventArgs) {
-            // update this method to handle nulls
-            ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+            if (!(SelectItemComboBox.SelectedItem is ItemDescription)) {
+                ItemCostTextBox.Text = string.Empty;
+            }
+            else {
+                ItemCostTextBox.Text = ((ItemDescription) SelectItemComboBox.SelectedItem).ItemCost.ToString("$0.00");
+            }
+
         }
 
         /// <summary>

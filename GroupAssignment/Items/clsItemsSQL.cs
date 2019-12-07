@@ -48,15 +48,11 @@ namespace GroupAssignment.Items
 
             return result;
         }
-        public List<string> addItem(int code, String Desc, decimal cost)
+        public void addItem(int code, String desc, decimal cost)
         {
 
-            //need to figure out how to add item to index
-            var result = dba.ExecuteSqlStatement("select ItemDesc from ItemDesc").Tables[0].AsEnumerable()
-                 .Where(x => x.Field<String>("Cost").Equals(code)).Select(y => y.Field<String>("ItemDesc"))
-                 .ToList();
+            dba.ExecuteSqlStatement("INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES("+code+","+ desc+","+ cost);
 
-            return result;
         }
         public bool inUse(int code)
         {

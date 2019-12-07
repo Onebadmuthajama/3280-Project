@@ -68,5 +68,13 @@ namespace GroupAssignment.Main {
 
             return result;
         }
+
+        public int DeleteInvoice(int invoiceId) {
+            var sql = $"Delete from Invoices where InvoiceNum = {invoiceId}";
+
+            var result = _dataAccess.ExecuteNonQuery(sql);
+
+            return result;
+        }
     }
 }

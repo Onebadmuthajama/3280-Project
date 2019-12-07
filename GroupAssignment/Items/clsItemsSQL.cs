@@ -51,7 +51,7 @@ namespace GroupAssignment.Items
         public void addItem(int code, String desc, decimal cost)
         {
 
-            dba.ExecuteSqlStatement("INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES("+code+","+ desc+","+ cost);
+            dba.ExecuteSqlStatement($"INSERT INTO ItemDesc(ItemCode, ItemDesc, Cost)VALUES({code},{ desc},{ cost}");
 
         }
         public bool inUse(int code)
@@ -92,13 +92,10 @@ namespace GroupAssignment.Items
 
         public int getLastCode()
         {
-            List<int> myList = new List<int>();
+            const string sql = "select ItemCode from ItemDesc order by ItemCode desc";
 
-            myList = dba.ExecuteSqlStatement("select ItemCode from ItemDesc order by ItemCode desc").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
-
-            int last = myList[myList.Count - 1];
-            return last;
-
+            var result = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("invoiceNum")).FirstOrDefault();
+            return result;
         }
 
         public List<ItemDescription> GetAllItemsForItems() {

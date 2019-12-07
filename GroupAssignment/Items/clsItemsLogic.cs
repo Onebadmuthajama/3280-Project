@@ -10,7 +10,7 @@ namespace GroupAssignment.Items {
 
         public clsItemsLogic() {
             iSQL = new clsItemsSQL();
-            //code = iSQL.getLastCode();
+            code = iSQL.getLastCode();
         }
 
         public List<ItemDescription> getItems() {

@@ -89,11 +89,12 @@ namespace GroupAssignment.Items
             }
             return invoices.ToString(); 
         }
+
         public int getLastCode()
         {
             List<int> myList = new List<int>();
 
-            myList = dba.ExecuteSqlStatement("select ItemCode from ItemDesc").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
+            myList = dba.ExecuteSqlStatement("select ItemCode from ItemDesc order by ItemCode desc").Tables[0].AsEnumerable().Select(x => x.Field<int>("ItemCode")).ToList();
 
             int last = myList[myList.Count - 1];
             return last;

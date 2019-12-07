@@ -17,6 +17,7 @@ namespace GroupAssignment.Main {
         private readonly clsMainSql _mainSql;
 
         private int _invoiceId;
+        private int _lineItemId;
 
         public MainWindow() {
             _mainLogic = new clsMainLogic();
@@ -24,6 +25,7 @@ namespace GroupAssignment.Main {
             _items = new List<LineItems>();
 
             InitializeComponent();
+            _lineItemId = _mainSql.GetLargestLineItemId();
             SelectItemComboBox.ItemsSource = _mainSql.GetAllItems();
             ItemDataGrid.ItemsSource = _items;
         }
@@ -65,7 +67,13 @@ namespace GroupAssignment.Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SaveChanges(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            var invoice = new Invoice {
+                InvoiceDate = InvoiceDatePicker.SelectedDate,
+                TotalCost = Convert.ToDecimal(InvoiceCostTextBox.Text.Replace('$', ' ').Trim()),
+                InvoiceNumber = _invoiceId
+            };
+
+            _mainSql.AddInvoice(invoice, _items);
         }
 
         /// <summary>
@@ -138,6 +146,9 @@ namespace GroupAssignment.Main {
 
             var totalCost = new decimal(0.00);
             var lineItem = _mainLogic.ParseItemDesc((ItemDescription) SelectItemComboBox.SelectedItem, _invoiceId);
+
+            _lineItemId += 1;
+            lineItem.LineItemNum = _lineItemId;
             _items.Add(lineItem);
             totalCost += _items.Sum(item => item.ItemCost);
             InvoiceCostTextBox.Text = totalCost.ToString("$0.00");

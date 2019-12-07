@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using GroupAssignment.Models;
 
 namespace GroupAssignment.Main {
@@ -46,6 +48,17 @@ namespace GroupAssignment.Main {
         }
 
         /// <summary>
+        ///     Returns an int representing the largest lineItemNum in the database
+        /// </summary>
+        /// <returns></returns>
+        public int GetLargestLineItemId() {
+            const string sql = "select LineItemNum from LineItems order by LineItemNum desc";
+
+            var result = _dataAccess.ExecuteSqlStatement(sql).Tables[0].AsEnumerable().Select(x => x.Field<int>("LineItemNum")).FirstOrDefault();
+            return result;
+        }
+
+        /// <summary>
         ///     Returns a list of LineItem object
         /// </summary>
         /// <returns></returns>
@@ -75,6 +88,16 @@ namespace GroupAssignment.Main {
             var result = _dataAccess.ExecuteNonQuery(sql);
 
             return result;
+        }
+
+        public void AddInvoice(Invoice invoice, List<LineItems> items) {
+            var sql = ($"Insert Into [Invoices] (InvoiceNum, InvoiceDate, TotalCost) Values({invoice.InvoiceNumber}, {invoice.InvoiceDate.Value:MM/dd/yyyy}, {invoice.TotalCost});");
+            _dataAccess.ExecuteNonQuery(sql);
+
+            foreach (var item in items) {
+                sql = ($"Insert Into [LineItems] (InvoiceNum, LineItemNum, ItemCode) Values({item.InvoiceNum}, {item.LineItemNum}, {item.ItemCode});");
+                _dataAccess.ExecuteNonQuery(sql);
+            }
         }
     }
 }

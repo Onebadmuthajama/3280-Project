@@ -103,29 +103,26 @@ namespace GroupAssignment.Items
             return last;
 
         }
-        public List<LineItems> GetAllItemsForItems()
-        {
-            //var sql = "SELECT ItemDesc.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost, LineItems.InvoiceNum FROM ItemDesc INNER JOIN LineItems ON LineItems.ItemCode = ItemDesc.ItemCode;";
 
-            //var result = new List<LineItems>();
-            //var ds = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
+        public List<ItemDescription> GetAllItemsForItems() {
+            const string sql = "SELECT * FROM ItemDesc";
 
-            //foreach (var row in ds)
-            //{
-            //    var itemDescription = new LineItems
-            //    {
-            //        ItemCode = row.Field<int>("ItemCode"),
-            //        ItemDesc = row.Field<String>("ItemDesc"),
-            //        Cost = row.Field<decimal>("Cost"),
-            //        InvoiceNum = row.Field<int>("InvoiceNum")
-            //    };
+            var result = new List<ItemDescription>();
+            var ds = dba.ExecuteSqlStatement(sql).Tables[0].AsEnumerable();
 
-            //    result.Add(itemDescription);
-            //}
+            foreach (var row in ds) {
+                var itemDescription = new ItemDescription {
+                    ItemCode = row.Field<int>("ItemCode"),
+                    ItemDesc = row.Field<string>("ItemDesc"),
+                    ItemCost=  row.Field<decimal>("Cost")
+                };
 
-            return null;
+                result.Add(itemDescription);
+            }
+
+            return result;
         }
-        }
+    }
 }
 
 
